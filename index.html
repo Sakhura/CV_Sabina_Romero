@@ -58,7 +58,7 @@
 
   <!-- THEME SWITCHER -->
   <div id="theme-switcher">
-    <span id="theme-label">🍄 Mario</span>
+    <span id="theme-label">🔵 Tech</span>
     <button id="theme-toggle" onclick="cycleTheme()">cambiar →</button>
   </div>
 
@@ -254,7 +254,7 @@
           <div class="timeline-date">2004 — 2011</div>
           <div class="timeline-card">
             <div class="card-header">
-              <h3>Analista de Calidad & Migración de Datos</h3>
+              <h3>Analista de Calidad &amp; Migración de Datos</h3>
               <span class="company-tag">Ente Call Center · Publiguías Yell Chile</span>
             </div>
             <p>Implementación de sistemas para clientes como Entel, Transbank, Banco Santander, NCR, Sodexo, KFC, Xerox y más. Migración de bases de datos Excel a SQL.</p>
@@ -333,7 +333,7 @@
         </div>
         <div class="cert-card" data-reveal>
           <div class="cert-icon">🗄️</div>
-          <h4>Programación Web & Bases de Datos</h4>
+          <h4>Programación Web &amp; Bases de Datos</h4>
           <p>Desarrollo web, diseño BD, administración, teoría conjuntos</p>
           <span class="cert-date">Abr–May 2022</span>
         </div>
@@ -343,8 +343,8 @@
         <h3>Otros cursos y certificaciones</h3>
         <div class="other-cert-list">
           <span>CCNA</span>
-          <span>CCNA Enterprise Networking, Security & Automation</span>
-          <span>CCNA Switching, Routing & Wireless</span>
+          <span>CCNA Enterprise Networking, Security &amp; Automation</span>
+          <span>CCNA Switching, Routing &amp; Wireless</span>
           <span>IT Essentials</span>
           <span>Full Stack JavaScript</span>
           <span>Curador de Datos</span>
@@ -367,7 +367,6 @@
         <h2>Formación</h2>
       </div>
       <div class="edu-grid">
-        
         <div class="edu-card" data-reveal>
           <div class="edu-year">Titulada</div>
           <h3>Ingeniero en Informática</h3>
@@ -386,7 +385,7 @@
           <p>Universidad Andrés Bello</p>
           <div class="edu-status active">En progreso tercer año</div>
         </div>
-           <div class="edu-card" data-reveal>
+        <div class="edu-card" data-reveal>
           <div class="edu-year">Cursando</div>
           <h3>Ingeniería en Ciberseguridad</h3>
           <p>Escuela de Comercio y Servicios</p>
@@ -452,11 +451,12 @@
   <script src="script.js"></script>
   <script>
     const themes = [
-      { id: 'mario',   css: 'style-mario.css',   label: '🍄 Mario'   },
-      { id: 'tech',    css: 'style-tech.css',     label: '🔵 Tech'    },
-      { id: 'light',   css: 'style-light.css',    label: '☀️ Light'   },
-      { id: 'neopets',     css: 'style-neopets.css',     label: '🌟 Neopets'     },
-      { id: 'sololeveling', css: 'style-sololeveling.css', label: '⚔️ Solo Leveling' },
+      { id: 'tech',        css: 'style-tech.css',        label: '🔵 Tech'        },
+      { id: 'light',       css: 'style-light.css',        label: '☀️ Light'       },
+      { id: 'neopets',     css: 'style-neopets.css',      label: '🌟 Neopets'     },
+      { id: 'sololeveling',css: 'style-sololeveling.css', label: '⚔️ Solo Leveling'},
+      { id: 'mario',       css: 'style-mario.css',        label: '🍄 Mario'       },
+      { id: 'minecraft',   css: 'style-minecraft.css',    label: '⛏️ Minecraft'   },
     ];
 
     let idx = themes.findIndex(t => t.id === (localStorage.getItem('theme') || 'tech'));
