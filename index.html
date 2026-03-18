@@ -5,13 +5,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sabina Romero Rodríguez — Fullstack Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link id="theme-css" rel="stylesheet" href="style-tech.css" />
+  <style>
+    /* Switcher siempre visible sin importar el tema */
+    #theme-switcher {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(0,0,0,0.9);
+      border: 3px solid #f8c800;
+      box-shadow: 4px 4px 0 #000;
+      padding: 0.5rem 0.9rem;
+      backdrop-filter: blur(10px);
+    }
+    #theme-label {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.42rem;
+      color: #f8c800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+    #theme-toggle {
+      background: #f8c800;
+      color: #180828;
+      border: 2px solid #000;
+      box-shadow: 2px 2px 0 #000;
+      padding: 0.45rem 0.9rem;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.38rem;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: transform 0.1s, box-shadow 0.1s;
+      white-space: nowrap;
+    }
+    #theme-toggle:hover {
+      transform: translate(1px, 1px);
+      box-shadow: 1px 1px 0 #000;
+    }
+  </style>
 </head>
 <body>
 
   <!-- CURSOR -->
   <div class="cursor"></div>
+
+  <!-- THEME SWITCHER -->
+  <div id="theme-switcher">
+    <span id="theme-label">🍄 Mario</span>
+    <button id="theme-toggle" onclick="cycleTheme()">cambiar →</button>
+  </div>
 
   <!-- NAV -->
   <nav>
@@ -25,6 +74,13 @@
     </ul>
     <a href="mailto:Sabina.romero@gmail.com" class="nav-cta">Contactar</a>
   </nav>
+
+  <!-- NEOPETS MARQUEE (solo visible en tema neopets) -->
+  <div class="neo-marquee" id="neo-marquee" style="display:none">
+    <span class="neo-marquee-inner">
+      ⭐ BIENVENIDOS AL MUNDO DE SABINA ⭐ FULLSTACK DEVELOPER ⭐ 92 MÓDULOS REUF APROBADOS ⭐ DOCENTE TI CERTIFICADA ⭐ JAVA · PYTHON · ANGULAR · AWS ⭐ DISPONIBLE PARA PROYECTOS ⭐ INGENIERÍA EN CIENCIAS DE DATOS ⭐ SANTIAGO, CHILE ⭐ CLICK AQUÍ PARA CONTRATAR ⭐ 
+    </span>
+  </div>
 
   <!-- HERO -->
   <header class="hero" id="inicio">
@@ -311,12 +367,7 @@
         <h2>Formación</h2>
       </div>
       <div class="edu-grid">
-        <div class="edu-card" data-reveal>
-          <div class="edu-year">Cursando</div>
-          <h3>Ingeniería en Ciencias de Datos</h3>
-          <p>Universidad Andrés Bello</p>
-          <div class="edu-status active">En progreso</div>
-        </div>
+        
         <div class="edu-card" data-reveal>
           <div class="edu-year">Titulada</div>
           <h3>Ingeniero en Informática</h3>
@@ -328,6 +379,18 @@
           <h3>Ingeniero Industrial</h3>
           <p>Instituto Profesional de Chile</p>
           <div class="edu-status done">Titulada</div>
+        </div>
+        <div class="edu-card" data-reveal>
+          <div class="edu-year">Cursando</div>
+          <h3>Ingeniería en Ciencias de Datos</h3>
+          <p>Universidad Andrés Bello</p>
+          <div class="edu-status active">En progreso tercer año</div>
+        </div>
+           <div class="edu-card" data-reveal>
+          <div class="edu-year">Cursando</div>
+          <h3>Ingeniería en Ciberseguridad</h3>
+          <p>Escuela de Comercio y Servicios</p>
+          <div class="edu-status active">En progreso primer año</div>
         </div>
       </div>
     </div>
@@ -382,10 +445,41 @@
   <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
-      <span>Sabina Romero Rodríguez · 2026</span>
+      <span>Sabina Romero Rodríguez · 2025</span>
+      <span>Diseñado y desarrollado con ❤️</span>
     </div>
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    const themes = [
+      { id: 'mario',   css: 'style-mario.css',   label: '🍄 Mario'   },
+      { id: 'tech',    css: 'style-tech.css',     label: '🔵 Tech'    },
+      { id: 'light',   css: 'style-light.css',    label: '☀️ Light'   },
+      { id: 'neopets',     css: 'style-neopets.css',     label: '🌟 Neopets'     },
+      { id: 'sololeveling', css: 'style-sololeveling.css', label: '⚔️ Solo Leveling' },
+    ];
+
+    let idx = themes.findIndex(t => t.id === (localStorage.getItem('theme') || 'tech'));
+    if (idx < 0) idx = 0;
+
+    function applyTheme() {
+      const t = themes[idx];
+      document.getElementById('theme-css').href = t.css;
+      document.getElementById('theme-label').textContent = t.label;
+      const next = themes[(idx + 1) % themes.length];
+      document.getElementById('theme-toggle').textContent = next.label + ' →';
+      localStorage.setItem('theme', t.id);
+      // show marquee only on neopets
+      document.getElementById('neo-marquee').style.display = t.id === 'neopets' ? 'block' : 'none';
+    }
+
+    function cycleTheme() {
+      idx = (idx + 1) % themes.length;
+      applyTheme();
+    }
+
+    applyTheme();
+  </script>
 </body>
 </html>
